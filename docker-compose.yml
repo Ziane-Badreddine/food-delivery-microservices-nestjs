@@ -1,0 +1,58 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  orders-db:
+    image: postgres:17
+    container_name: orders-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: order
+      POSTGRES_PASSWORD: order
+      POSTGRES_DB: orders
+    volumes:
+      - orders_data:/var/lib/postgresql/data
+
+  kitchen-db:
+    image: postgres:17
+    container_name: kitchen-db
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: kitchen
+      POSTGRES_PASSWORD: kitchen
+      POSTGRES_DB: kitchen
+    volumes:
+      - kitchen_data:/var/lib/postgresql/data
+
+  rider-db:
+    image: postgres:17
+    container_name: rider-db
+    restart: unless-stopped
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: rider
+      POSTGRES_PASSWORD: rider
+      POSTGRES_DB: rider
+    volumes:
+      - rider_data:/var/lib/postgresql/data
+
+volumes:
+  rabbitmq_data:
+  orders_data:
+  kitchen_data:
+  rider_data:
