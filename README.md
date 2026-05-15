@@ -2,17 +2,7 @@
 
 A small NestJS-based microservices workspace that models a food delivery workflow with three services (orders, kitchen, rider), RabbitMQ for events, and Postgres + Drizzle for persistence.
 
-```mermaid
-flowchart LR
-  Client[Client / API] --> Orders[Orders Service]
-  Orders -->|order_created| Rabbit[(RabbitMQ)]
-  Rabbit --> Kitchen[Kitchen Service]
-  Kitchen -->|order_ready| Rabbit
-  Rabbit --> Rider[Rider Service]
-  Orders --> OrdersDB[(Orders DB)]
-  Kitchen --> KitchenDB[(Kitchen DB)]
-  Rider --> RiderDB[(Rider DB)]
-```
+![Architecture diagram](./public/docs/architecture.png)
 
 ## Services
 
